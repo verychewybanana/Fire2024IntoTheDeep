@@ -2,9 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -20,30 +22,19 @@ public class FireHardwareMap {
     public DcMotor backRightMotor = null;
     public DcMotor backLeftMotor = null;
 
-    // create slide motors
-    public DcMotor slideLeftMotor = null;
-    public DcMotor slideRightMotor = null;
-    public DcMotor stringMotor = null;
+    // create motors
+    public DcMotor slideMotor = null;
+    public DcMotor susanMotor = null;
 
     //create mechanism servos
-    public DcMotor intakeMotor = null;
-    public Servo boxLeftServo = null;
-    public Servo boxRightServo = null;
-    public CRServo doorServo = null;
-//    public Servo separatorServo = null;
-    public CRServo airplaneServo = null;
-//    public Servo hookServo = null;
-
-//    public RevBlinkinLedDriver led = null;
+    public CRServo armServo = null;
+    public CRServo clawServo = null;
 
     public ColorRangeSensor color = null;
 
     public BNO055IMU imu = null;
 
-    public Servo leftHook = null;
-
-    public Servo rightHook = null;
-public RevBlinkinLedDriver led = null;
+    public RevBlinkinLedDriver led = null;
 
 
     //Hardware Map object
@@ -63,91 +54,64 @@ public RevBlinkinLedDriver led = null;
         frontLeftMotor = HardwareMap.get(DcMotor.class, "frontLeftMotor");
         backRightMotor = HardwareMap.get(DcMotor.class, "backRightMotor");
         backLeftMotor = HardwareMap.get(DcMotor.class, "backLeftMotor");
-        intakeMotor = HardwareMap.get(DcMotor.class, "intakeMotor");
-        stringMotor = HardwareMap.get(DcMotor.class, "stringMotor");
-        slideLeftMotor = HardwareMap.get(DcMotor.class, "slideLeftMotor");
-        slideRightMotor = HardwareMap.get(DcMotor.class, "slideRightMotor");
-       led = HardwareMap.get(RevBlinkinLedDriver.class, "led");
-        color = HardwareMap.get(ColorRangeSensor.class, "color");
+        slideMotor = HardwareMap.get(DcMotor.class, "slideMotor");
+        susanMotor = HardwareMap.get(DcMotor.class, "susanMotor");
+        // imu = HardwareMap.get(BNO055IMU.class, "imuex");
+       // led = HardwareMap.get(RevBlinkinLedDriver.class, "led");
+       // color = HardwareMap.get(ColorRangeSensor.class, "color");
+
         //Making servo
-        boxLeftServo = HardwareMap.get(Servo.class, "leftServo");
-        boxRightServo = HardwareMap.get(Servo.class, "rightServo");
-
-        leftHook = HardwareMap.get(Servo.class, "leftHook");
-        rightHook = HardwareMap.get(Servo.class, "rightHook");
-//        separatorServo = HardwareMap.get(Servo.class, "separatorServo");
-        doorServo = HardwareMap.get(CRServo.class, "doorServo");
-        airplaneServo = HardwareMap.get(CRServo.class, "airplaneServo");
-//        hookServo = HardwareMap.get(Servo.class, "hookServo");
-
-        slideLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        slideRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+        armServo = HardwareMap.get(CRServo.class, "armServo");
+        clawServo = HardwareMap.get(CRServo.class, "clawServo");
 
         //Set up motor direction
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotor.Direction.FORWARD);
-//        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
-        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-//        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
 
-        slideLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        slideRightMotor.setDirection((DcMotor.Direction.FORWARD));
+        slideMotor.setDirection(DcMotor.Direction.REVERSE);
+        susanMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        stringMotor.setDirection(DcMotor.Direction.FORWARD);
-
-        boxLeftServo.setDirection(Servo.Direction.FORWARD);
-        boxRightServo.setDirection(Servo.Direction.REVERSE);
-//        separatorServo.setDirection(Servo.Direction.FORWARD);
-        airplaneServo.setDirection(CRServo.Direction.REVERSE);
-        doorServo.setDirection(CRServo.Direction.FORWARD);
-//        hookServo.setDirection(Servo.Direction.FORWARD);
+        // armServo.setDirection(CRServo.Direction.FORWARD);
+        clawServo.setDirection(CRServo.Direction.FORWARD);
+        armServo.setDirection(CRServo.Direction.FORWARD);
 
         //Set motor mode
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
+        slideMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        susanMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //Set zero power behavior
-
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slideRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slideLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        stringMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        slideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        susanMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Set 0 power
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
-//        intakeMotor.setPower(0);
-//        actuatorMotor.setPower(0);
 
-        boxLeftServo.setPosition(Constants.BOXLEFTSERVO_HOMEPOSITION);
-        boxRightServo.setPosition(Constants.BOXRIGHTSERVO_HOMEPOSITION);
+        slideMotor.setPower(0);
+        susanMotor.setPower(0);
 
-
-
-
-        boxLeftServo.setPosition(0.0);
-        boxRightServo.setPosition(0.0);
-//        separatorServo.setPosition(0.5);
-        doorServo.setPower(0.35);
-        airplaneServo.setPower(0.0);
-//        hookServo.setPower(0.0);
+        // .setPosition(Constants.ARMSERVO_HOMEPOSITION);
+        // armServo.setPosition(0);
+        clawServo.setPower(0);
+        armServo.setPower(0);
 
 
 
-
+        /*
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         //return value of radians
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -163,14 +127,15 @@ public RevBlinkinLedDriver led = null;
         imu.initialize(parameters);
         imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
+         */
+        BNO055IMU imu = HardwareMap.get(BNO055IMU.class, "imu");
 
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.mode                = BNO055IMU.SensorMode.IMU;
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.loggingEnabled      = false;
+
+        imu.initialize(parameters);
     }
-
-
-
-
-
-
-
-
 }

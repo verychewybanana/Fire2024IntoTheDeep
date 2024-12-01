@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.TimeAutons;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -63,3 +64,5 @@ public class dontMoveCloseTime extends LinearOpMode {
 
     }
 }
+
+ */

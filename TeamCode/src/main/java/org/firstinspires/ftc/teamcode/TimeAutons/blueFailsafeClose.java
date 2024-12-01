@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.TimeAutons;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -79,3 +80,5 @@ public class blueFailsafeClose extends LinearOpMode {
 
 
 }
+
+ */

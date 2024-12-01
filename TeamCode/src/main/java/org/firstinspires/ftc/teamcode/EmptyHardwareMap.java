@@ -55,12 +55,4 @@ public class EmptyHardwareMap {
         intakeMotor = HardwareMap.get(DcMotor.class, "intakeMotor");
         intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
-
-
-
-
-
-
-
-
 }
