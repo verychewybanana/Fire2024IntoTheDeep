@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode;
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -47,6 +48,9 @@ public class LinearTeleOp extends LinearOpMode {
 
     public void runOpMode() {
         HW = new FireHardwareMap(this.hardwareMap);
+
+        FtcDashboard dashboard = FtcDashboard.getInstance();
+        telemetry = dashboard.getTelemetry();
 
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
@@ -139,44 +143,6 @@ public class LinearTeleOp extends LinearOpMode {
                 rightBackPower  /= 2;
             }
 
-          /*
-            double doorServoPower = HW.doorServo.getPower();
-
-            if (gamepad2.b) {
-                doorServoPower = 0.35;
-            } else if (gamepad2.a) {
-                doorServoPower = -0.8;
-//            } else {
-//                doorServoPower = 0.0;
-            }
-
-            double airplaneServoPower;
-
-            if (gamepad1.y) {
-                airplaneServoPower = 0.8;
-            } else if (gamepad1.b) {
-                airplaneServoPower = -0.8;
-            } else {
-              ]
-               =['irplaneServoPower = 0;
-            }-oad2.left_bumper) {
-//                separatorServoPosition = 0.3;
-//            }  else if (gamepad2.right_bumper) {
-//                separatorServoPosition = 0.7;
-//            }
-//
-//            double hookServoPower;
-
-            if (gamepad1.dpad_up) {
-                hangMotorPower = 0.9;
-            } else if (gamepad1.dpad_down) {
-                hangMotorPower = -0.9;
-            }
-
-
-
-           */
-
             if (gamepad2.a) {
                 armPower = -0.3;
             } else if (gamepad2.y) {
@@ -250,6 +216,8 @@ public class LinearTeleOp extends LinearOpMode {
             telemetry.addData("LED ARGB", HW.color.argb());
 
              */
+
+
 
             telemetry.update();
 
