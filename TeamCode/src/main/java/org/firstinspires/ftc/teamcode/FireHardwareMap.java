@@ -22,20 +22,7 @@ public class FireHardwareMap {
     public DcMotor backRightMotor = null;
     public DcMotor backLeftMotor = null;
 
-    // create motors
-    public DcMotor slideMotor = null;
-    public DcMotor susanMotor = null;
-
-    //create mechanism servos
-    public CRServo armServo = null;
-    public CRServo clawServo = null;
-
-    public ColorRangeSensor color = null;
-
-    public BNO055IMU imu = null;
-
-    public RevBlinkinLedDriver led = null;
-
+    public CRServo goonerServo = null;
 
     //Hardware Map object
     com.qualcomm.robotcore.hardware.HardwareMap HardwareMap = null;
