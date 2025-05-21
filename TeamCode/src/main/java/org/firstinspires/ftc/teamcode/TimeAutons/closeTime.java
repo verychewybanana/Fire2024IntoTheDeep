@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.TimeAutons;
 
 import com.acmerobotics.dashboard.config.Config;
@@ -135,3 +136,4 @@ public class closeTime extends LinearOpMode {
         sleep(200);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -13,7 +14,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
 
  */
-
+/*
 @TeleOp(name="Field Oriented TeleOp", group="Linear Opmode")
 public class FieldOriented extends LinearOpMode {
 
@@ -30,7 +31,7 @@ public class FieldOriented extends LinearOpMode {
     Right bumper - toggle hook servo up or down
     Left joystick y - spin intake wheels
     Right joystick x - actuator motor
-     */
+
 
 
     //ServoImplEx servo;
@@ -150,7 +151,7 @@ public class FieldOriented extends LinearOpMode {
 
 
 
-           */
+
 
             double slidePower;
             double susanPower;
@@ -232,8 +233,8 @@ public class FieldOriented extends LinearOpMode {
 
              */
 
-            telemetry.update();
+           // telemetry.update();
 
-        }
-    }
-}
+        //}
+    //}
+//}

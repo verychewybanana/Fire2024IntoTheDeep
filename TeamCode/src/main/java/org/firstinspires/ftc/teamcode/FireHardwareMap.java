@@ -21,8 +21,14 @@ public class FireHardwareMap {
     public DcMotor frontLeftMotor = null;
     public DcMotor backRightMotor = null;
     public DcMotor backLeftMotor = null;
+    public BNO055IMU imu;
 
     public CRServo goonerServo = null;
+    public RevBlinkinLedDriver led;
+
+    public void init(HardwareMap hwMap) {
+        led = hwMap.get(RevBlinkinLedDriver.class, "led");  // Make sure "led" matches your config name
+    }
 
     //Hardware Map object
     com.qualcomm.robotcore.hardware.HardwareMap HardwareMap = null;
@@ -41,15 +47,12 @@ public class FireHardwareMap {
         frontLeftMotor = HardwareMap.get(DcMotor.class, "frontLeftMotor");
         backRightMotor = HardwareMap.get(DcMotor.class, "backRightMotor");
         backLeftMotor = HardwareMap.get(DcMotor.class, "backLeftMotor");
-        slideMotor = HardwareMap.get(DcMotor.class, "slideMotor");
-        susanMotor = HardwareMap.get(DcMotor.class, "susanMotor");
         // imu = HardwareMap.get(BNO055IMU.class, "imuex");
        // led = HardwareMap.get(RevBlinkinLedDriver.class, "led");
        // color = HardwareMap.get(ColorRangeSensor.class, "color");
 
         //Making servo
-        armServo = HardwareMap.get(CRServo.class, "armServo");
-        clawServo = HardwareMap.get(CRServo.class, "clawServo");
+        goonerServo = HardwareMap.get(CRServo.class, "goonerServo");
 
         //Set up motor direction
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -57,12 +60,7 @@ public class FireHardwareMap {
         backRightMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
 
-        slideMotor.setDirection(DcMotor.Direction.REVERSE);
-        susanMotor.setDirection(DcMotor.Direction.REVERSE);
-
-        // armServo.setDirection(CRServo.Direction.FORWARD);
-        clawServo.setDirection(CRServo.Direction.FORWARD);
-        armServo.setDirection(CRServo.Direction.FORWARD);
+        goonerServo.setDirection(CRServo.Direction.FORWARD);
 
         //Set motor mode
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -70,8 +68,6 @@ public class FireHardwareMap {
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        slideMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        susanMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //Set zero power behavior
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -79,8 +75,6 @@ public class FireHardwareMap {
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        slideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        susanMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Set 0 power
         frontRightMotor.setPower(0);
@@ -88,13 +82,10 @@ public class FireHardwareMap {
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
 
-        slideMotor.setPower(0);
-        susanMotor.setPower(0);
 
         // .setPosition(Constants.ARMSERVO_HOMEPOSITION);
         // armServo.setPosition(0);
-        clawServo.setPower(0);
-        armServo.setPower(0);
+        goonerServo.setPower(0);
 
 
 

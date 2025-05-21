@@ -1,4 +1,6 @@
+/*
 package org.firstinspires.ftc.teamcode.TimeAutons;
+
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -145,3 +147,5 @@ public class farTime extends LinearOpMode {
     }
 
 }
+
+ */

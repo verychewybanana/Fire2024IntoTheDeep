@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
@@ -12,8 +13,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * 2) Lateral:  Strafing right and left                     Left-joystick Right and Left
  * 3) Yaw:      Rotating Clockwise and counter clockwise    Right-joystick Right and Left
  *
+**/
 
- */
 
 @TeleOp(name="Robot Oriented TeleOpp", group="Linear Opmode")
 public class LinearTeleOp extends LinearOpMode {
@@ -31,7 +32,7 @@ public class LinearTeleOp extends LinearOpMode {
     Right bumper - toggle hook servo up or down
     Left joystick y - spin intake wheels
     Right joystick x - actuator motor
-     */
+*/
 
 
     //ServoImplEx servo;
@@ -63,7 +64,7 @@ public class LinearTeleOp extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max;
-            double i =0.0;
+            double i = 0.0;
             int hook = 0;
 
             double GRB = 0;
@@ -84,36 +85,30 @@ public class LinearTeleOp extends LinearOpMode {
             if (HW.color.green() <= 298 && HW.color.green()>=198 && HW.color.red() <= 358 && HW.color.red() >= 258 && HW.color.blue()<=196 && HW.color.blue()>=96 ){
                 HW.led.setPattern(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
             }
-
-             */
-
+*/
 
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x * 1.1;
-            double yaw     =  gamepad1.right_stick_x;
+            double axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            double lateral = gamepad1.left_stick_x * 1.1;
+            double yaw = gamepad1.right_stick_x;
 
 //            if (lateral >= 0.5) isStrafing = true;
 
 
-            double axial2 =  -gamepad2.left_stick_y;
+            double axial2 = -gamepad2.left_stick_y;
 //            double lateral2 =  gamepad2.left_stick_x * 1.1;
-            double yaw2     =  gamepad2.right_stick_x;
+            double yaw2 = gamepad2.right_stick_x;
 
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            double leftFrontPower  = axial + lateral + yaw;
+            double leftFrontPower = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
-            double leftBackPower   = axial - lateral + yaw;
-            double rightBackPower  = axial + lateral - yaw;
+            double leftBackPower = axial - lateral + yaw;
+            double rightBackPower = axial + lateral - yaw;
 
-            double slidePower;
-            double susanPower;
-
-            double armPower = 0;
-            double clawPower = 0;
+            double goonerServoPower;
 
 
             // Normalize the values so no wheel power exceeds 100%
@@ -123,104 +118,61 @@ public class LinearTeleOp extends LinearOpMode {
             max = Math.max(max, Math.abs(rightBackPower));
             i = gamepad1.right_trigger;
             if (max > 1) {
-                leftFrontPower  /= max;
+                leftFrontPower /= max;
                 rightFrontPower /= max;
-                leftBackPower   /= max;
-                rightBackPower  /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
 //                axial2 /=max;
                 i /= max;
 //                (lateral2)/=max;
-                yaw2 /=max;
+                yaw2 /= max;
             }
 
             if (gamepad1.right_bumper) {
-                i=i;
-            }
-            else{
-                leftFrontPower  /= 2;
+                i = i;
+            } else {
+                leftFrontPower /= 2;
                 rightFrontPower /= 2;
-                leftBackPower   /= 2;
-                rightBackPower  /= 2;
+                leftBackPower /= 2;
+                rightBackPower /= 2;
             }
 
-            if (gamepad2.a) {
-                armPower = -0.3;
-            } else if (gamepad2.y) {
-                armPower = 0.7;
-            } else {
-                armPower = 0;
-            }
+            if (gamepad2.right_bumper)
+                goonerServoPower = 0.9;
+            else
+                goonerServoPower = 0;
 
-            double susanPosition = HW.susanMotor.getCurrentPosition();
 
-            if (gamepad1.dpad_left) {
-                susanPower = 0.5;
-            } else if (gamepad1.dpad_right) {
-                susanPower = -0.5;
-            } else {
-                susanPower = 0;
-            }
-
-            if (gamepad2.dpad_up) {
-                slidePower = 0.9;
-            } else if (gamepad2.dpad_down) {
-                slidePower = -0.9;
-            } else {
-                slidePower = 0;
-            }
-
-//            if (gamepad2.dpad_right) {
-//                HW.armServo.setPosition(0.5);
-//            } else if (gamepad2.dpad_left) {
-//                HW.armServo.setPosition(0);
-//            }
-
-//            double armServoPosition = HW.armServo.getPosition();
-//
-//            if (gamepad2.y) {
-//                armServoPosition = 0.0;
-//            } else if (gamepad2.a) {
-//                armServoPosition = 0.5;
-//            }
-
-            if (gamepad2.right_bumper) {
-                clawPower = 0.8;
-            } else {
-                clawPower = -0.2;
-            }
-
-            yaw2 = yaw2/1.5;
+            yaw2 = yaw2 / 1.5;
 
             // Send calculated power to wheels
             HW.frontLeftMotor.setPower(leftFrontPower);
             HW.frontRightMotor.setPower(rightFrontPower);
-            HW.backLeftMotor.setPower(leftBackPower*1.1);
-            HW.backRightMotor.setPower(rightBackPower*1.1);
+            HW.backLeftMotor.setPower(leftBackPower * 1.1);
+            HW.backRightMotor.setPower(rightBackPower * 1.1);
 
-            HW.slideMotor.setPower(slidePower);
-            HW.susanMotor.setPower(susanPower);
 
-            HW.clawServo.setPower(clawPower);
             // HW.armServo.setPosition(armServoPosition);
+            HW.goonerServo.setPower(goonerServoPower);
 
-            HW.armServo.setPower(armPower);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
-            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            telemetry.addData("Back left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+
             /*
             telemetry.addData("LED GREEN", HW.color.green());
             telemetry.addData("LED red", HW.color.red());
             telemetry.addData("LED blue", HW.color.blue());
             telemetry.addData("LED ARGB", HW.color.argb());
 
-             */
+
 
 
 
             telemetry.update();
-
+*/
         }
     }
 }

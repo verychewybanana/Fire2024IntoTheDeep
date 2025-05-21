@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.TimeAutons;
 
 import android.util.Size;
@@ -114,4 +115,5 @@ public class simpleCloseTime extends LinearOpMode {
 
         sleep(200);
     }
-}
+
+ */
